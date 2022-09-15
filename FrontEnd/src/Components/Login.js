@@ -7,8 +7,11 @@ class Login extends Component {
 		password: "",};
 
 	handleLogIn = async () => {
-		const result = await axios.post('http://127.0.0.1:5000/login', { username: this.state.username , password: this.state.password});
-		console.log(result)
+		const headers = {"Content-type":"application/json"}
+		const res = await axios.post('http://127.0.0.1:5000/login', { username: this.state.username , password: this.state.password},{headers:headers});
+		console.log(res.data["access_token"])
+		sessionStorage.setItem("token",res.data["access_token"])
+		window.location.reload(false)
 	};
 	
 	handleUserInput  = (e) => {
@@ -17,7 +20,7 @@ class Login extends Component {
 		this.setState({[name]: value});
 		}
 
-	render() {
+	render()  {
 		return (
 			<main className="LogIn">
 				<h1>Log In</h1>
