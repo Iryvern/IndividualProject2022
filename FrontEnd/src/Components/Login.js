@@ -11,6 +11,7 @@ class Login extends Component {
 		const res = await axios.post('http://127.0.0.1:5000/login', { username: this.state.username , password: this.state.password},{headers:headers});
 		console.log(res.data["access_token"])
 		sessionStorage.setItem("token",res.data["access_token"])
+		sessionStorage.setItem("username",this.state.username)
 		window.location.reload(false)
 	};
 	

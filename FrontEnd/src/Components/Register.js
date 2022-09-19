@@ -4,6 +4,7 @@ import axios from "axios";
 class Register extends Component {
 	state = { 
 		username: "",
+		email:"",
 		password: "",
         rpassword: ""};
 
@@ -18,7 +19,7 @@ class Register extends Component {
 	}
 
 	Register = async () => {
-		const result = await axios.post('http://127.0.0.1:5000/register', { username: this.state.username , password: this.state.password});
+		const result = await axios.post('http://127.0.0.1:5000/register', { username: this.state.username , password: this.state.password, email: this.state.email});
 		console.log(result)
 	};
 	
@@ -39,6 +40,16 @@ class Register extends Component {
 						required
 						name="username"
 						value={this.state.username}
+						onChange={this.handleUserInput}
+					></input>
+				</p>
+				<p className="Input">
+					<input  className="Email"
+						type="text"
+						placeholder="Email"
+						required
+						name="email"
+						value={this.state.email}
 						onChange={this.handleUserInput}
 					></input>
 				</p>
