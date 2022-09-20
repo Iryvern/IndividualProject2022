@@ -9,10 +9,14 @@ class Login extends Component {
 	handleLogIn = async () => {
 		const headers = {"Content-type":"application/json"}
 		const res = await axios.post('http://127.0.0.1:5000/login', { username: this.state.username , password: this.state.password},{headers:headers});
-		console.log(res.data["access_token"])
-		sessionStorage.setItem("token",res.data["access_token"])
-		sessionStorage.setItem("username",this.state.username)
-		window.location.reload(false)
+		if(res.data!==false){
+			sessionStorage.setItem("token",res.data["access_token"])
+			sessionStorage.setItem("username",this.state.username)
+			window.location.reload(false)
+		}
+		else{
+			console.log("Could not log in")
+		}
 	};
 	
 	handleUserInput  = (e) => {

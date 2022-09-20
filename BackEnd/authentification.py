@@ -21,6 +21,7 @@ def login(username, password):
     if result != None:
         try:
             response = compare_e_data(password, result["password"])
+            print(response)
             if response == True:
                 return True
             else:
@@ -37,13 +38,19 @@ def change_username(o_username, n_username):
     if result != None:
         collection.update_one({"username": o_username}, {
             "$set": {"username": n_username}})
+    else:
+        return False
 
 
 def change_email(username, email):
     result = collection.find_one({"username": username})
+    print(result)
+    print(username)
     if result != None:
         collection.update_one({"username": username}, {
             "$set": {"email": email}})
+    else:
+        return False
 
 
 def change_password(username, o_password, n_password):
@@ -54,3 +61,5 @@ def change_password(username, o_password, n_password):
             e_password = encrypt_data(n_password)
             collection.update_one({"username": username}, {
                 "$set": {"password": e_password}})
+    else:
+        return False

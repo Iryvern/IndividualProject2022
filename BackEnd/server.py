@@ -47,7 +47,7 @@ class ChangeUsername_Authenticate(Resource):
     def post(self):
         n_username = request.json.get("username")
         o_username = request.json.get("o_username")
-        response = change_username(n_username, o_username)
+        response = change_username(o_username, n_username)
         return response
 
 
