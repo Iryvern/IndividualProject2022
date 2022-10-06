@@ -14,8 +14,7 @@ app.config["JWT_SECRET_KEY"] = "ZOl9P^8Ag9K6O2JCmjc&"  # Hide this!
 jwt = JWTManager(app)
 
 
-@app.route("/test", methods=["POST"])
-@jwt_required()
+@app.route("/test", methods=["GET"])
 def test():
     print("Test")
     return "Test"
