@@ -6,4 +6,3 @@ uuid
 Flask-Cors
 dnspython
 Flask-JWT-Extended
-gunicorn

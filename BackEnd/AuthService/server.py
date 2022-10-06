@@ -76,4 +76,5 @@ api.add_resource(ChangeEmail_Auth, "/change/email")
 api.add_resource(ChangePassword_Auth, "/change/password")
 
 if __name__ == "__main__":
-    app.run(debug=True, port=5000)
+    from waitress import serve
+    serve(app, host="0.0.0.0", port=5000)
