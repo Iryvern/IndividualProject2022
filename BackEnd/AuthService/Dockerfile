@@ -13,7 +13,7 @@ RUN pip install -r requirements.txt
 
 EXPOSE 5000
 
-CMD ["flask", "run"]
+CMD ["python", "server.py"]
 
 #docker build -t api .
 #docker run -p 5000:5000 -it api
