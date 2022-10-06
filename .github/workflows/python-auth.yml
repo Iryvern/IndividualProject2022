@@ -39,7 +39,7 @@ jobs:
      - uses: actions/checkout@v3
      - name: Dockerizing
        run: |
-          docker build -t auth_api .
+          docker build -t auth_api:latest .
      -
        name: Login to DockerHub
        run: |
