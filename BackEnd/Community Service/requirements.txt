@@ -1,0 +1,7 @@
+Flask
+Flask-RESTful
+PyNaCl
+pymongo
+uuid
+Flask-Cors
+Flask-JWT-Extended

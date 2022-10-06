@@ -21,7 +21,7 @@ def test():
     return "Test"
 
 
-class Login_Authenticate(Resource):
+class Login_Auth(Resource):
     def post(self):
         username = request.json.get("username")
         password = request.json.get("password")
@@ -33,7 +33,7 @@ class Login_Authenticate(Resource):
             return response
 
 
-class Register_Authenticate(Resource):
+class Register_Auth(Resource):
     def post(self):
         username = request.json.get("username")
         password = request.json.get("password")
@@ -42,7 +42,7 @@ class Register_Authenticate(Resource):
         return response
 
 
-class ChangeUsername_Authenticate(Resource):
+class ChangeUsername_Auth(Resource):
     @jwt_required()
     def post(self):
         n_username = request.json.get("username")
@@ -51,7 +51,7 @@ class ChangeUsername_Authenticate(Resource):
         return response
 
 
-class ChangeEmail_Authenticate(Resource):
+class ChangeEmail_Auth(Resource):
     @jwt_required()
     def post(self):
         username = request.json.get("username")
@@ -60,7 +60,7 @@ class ChangeEmail_Authenticate(Resource):
         return response
 
 
-class ChangePassword_Authenticate(Resource):
+class ChangePassword_Auth(Resource):
     @jwt_required()
     def post(self):
         username = request.json.get("username")
@@ -70,11 +70,11 @@ class ChangePassword_Authenticate(Resource):
         return response
 
 
-api.add_resource(Login_Authenticate, "/login")
-api.add_resource(Register_Authenticate, "/register")
-api.add_resource(ChangeUsername_Authenticate, "/change/username")
-api.add_resource(ChangeEmail_Authenticate, "/change/email")
-api.add_resource(ChangePassword_Authenticate, "/change/password")
+api.add_resource(Login_Auth, "/login")
+api.add_resource(Register_Auth, "/register")
+api.add_resource(ChangeUsername_Auth, "/change/username")
+api.add_resource(ChangeEmail_Auth, "/change/email")
+api.add_resource(ChangePassword_Auth, "/change/password")
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, port=5000)
