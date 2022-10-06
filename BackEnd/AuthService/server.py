@@ -5,6 +5,7 @@ from authentification import *
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import jwt_required
 from flask_jwt_extended import JWTManager
+from waitress import serve
 
 
 app = Flask(__name__)
@@ -76,5 +77,4 @@ api.add_resource(ChangeEmail_Auth, "/change/email")
 api.add_resource(ChangePassword_Auth, "/change/password")
 
 if __name__ == "__main__":
-    from waitress import serve
     serve(app, host="0.0.0.0", port=5000)

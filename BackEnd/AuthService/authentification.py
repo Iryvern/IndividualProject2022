@@ -21,7 +21,6 @@ def login(username, password):
     if result != None:
         try:
             response = compare_e_data(password, result["password"])
-            print(response)
             if response == True:
                 return True
             else:
