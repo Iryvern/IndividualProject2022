@@ -18,9 +18,7 @@ permissions:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python 3.9.6
@@ -35,3 +33,11 @@ jobs:
     - name: Test with pytest
       run: |
         pytest testing.py
+  deploy:
+     runs-on: ubuntu-latest
+     steps:
+     - uses: actions/checkout@v3
+     - name: Dockerizing
+       run: |
+          docker build -t auth_api .
+    
