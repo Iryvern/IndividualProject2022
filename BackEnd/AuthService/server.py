@@ -5,10 +5,13 @@ from authentification import *
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import jwt_required
 from flask_jwt_extended import JWTManager
+from flask_wtf.csrf import CSRFProtect
 from waitress import serve
 
 
 app = Flask(__name__)
+csrf = CSRFProtect()
+csrf.init_app(app)
 CORS(app)
 api = Api(app)
 app.config["JWT_SECRET_KEY"] = "ZOl9P^8Ag9K6O2JCmjc&"  # Hide this!
@@ -17,7 +20,6 @@ jwt = JWTManager(app)
 
 @app.route("/test", methods=["GET"])
 def test():
-    print("Test")
     return "Test"
 
 

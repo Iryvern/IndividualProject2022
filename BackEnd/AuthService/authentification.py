@@ -5,7 +5,7 @@ import uuid
 
 def register(username, password, email):
     result = collection.find_one({"username": username})
-    if result == None:
+    if result is None:
         unique_id = str(uuid.uuid4())
         e_password = encrypt_data(password)
         json_data = {"_id": unique_id,
@@ -18,15 +18,15 @@ def register(username, password, email):
 
 def login(username, password):
     result = collection.find_one({"username": username})
-    if result != None:
+    if result is not None:
         try:
             response = compare_e_data(password, result["password"])
-            if response == True:
+            if response is True:
                 return True
             else:
                 return False
 
-        except:
+        except ValueError as e:
             return False
     else:
         return False
@@ -34,7 +34,7 @@ def login(username, password):
 
 def change_username(o_username, n_username):
     result = collection.find_one({"username": o_username})
-    if result != None:
+    if result is not None:
         collection.update_one({"username": o_username}, {
             "$set": {"username": n_username}})
     else:
@@ -45,7 +45,7 @@ def change_email(username, email):
     result = collection.find_one({"username": username})
     print(result)
     print(username)
-    if result != None:
+    if result is not None:
         collection.update_one({"username": username}, {
             "$set": {"email": email}})
     else:
@@ -54,9 +54,9 @@ def change_email(username, email):
 
 def change_password(username, o_password, n_password):
     result = collection.find_one({"username": username})
-    if result != None:
+    if result is not None:
         response = compare_e_data(o_password, result["password"])
-        if response == True:
+        if response is True:
             e_password = encrypt_data(n_password)
             collection.update_one({"username": username}, {
                 "$set": {"password": e_password}})
