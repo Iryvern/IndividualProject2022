@@ -12,7 +12,7 @@ from waitress import serve
 app = Flask(__name__)
 csrf = CSRFProtect()
 csrf.init_app(app)
-CORS(app)
+CORS(app, resources={r"/*": {"origins": "*", "send_wildcard": "False"}})
 api = Api(app)
 app.config["JWT_SECRET_KEY"] = "ZOl9P^8Ag9K6O2JCmjc&"  # Hide this!
 jwt = JWTManager(app)
