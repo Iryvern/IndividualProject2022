@@ -8,11 +8,12 @@ from flask_jwt_extended import JWTManager
 from flask_wtf.csrf import CSRFProtect
 from database import *
 
+white = ["localhost:3000"]
 
 app = Flask(__name__)
 csrf = CSRFProtect()
 csrf.init_app(app)
-CORS(app, resources={r"/*": {"origins": "*", "send_wildcard": "False"}})
+CORS(app, resources={r"/*": {"origins": white, "send_wildcard": "False"}})
 api = Api(app)
 app.config["JWT_SECRET_KEY"] = "ZOl9P^8Ag9K6O2JCmjc&"  # Hide this!
 jwt = JWTManager(app)
