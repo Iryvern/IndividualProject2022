@@ -1,6 +1,5 @@
 from encryption import *
 from authentification import *
-import mongomock
 
 
 class TestEncryption:

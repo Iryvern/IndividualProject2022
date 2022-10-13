@@ -1,4 +1,5 @@
 import nacl.pwhash
+import mongomock
 
 
 def encrypt_data(string):
