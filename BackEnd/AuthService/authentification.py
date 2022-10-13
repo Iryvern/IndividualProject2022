@@ -36,6 +36,7 @@ def change_username(o_username, n_username, db):
     if result is not None:
         db.update_one({"username": o_username}, {
             "$set": {"username": n_username}})
+        return True
     else:
         return False
 
@@ -47,6 +48,7 @@ def change_email(username, email, db):
     if result is not None:
         db.update_one({"username": username}, {
             "$set": {"email": email}})
+        return True
     else:
         return False
 
@@ -59,5 +61,6 @@ def change_password(username, o_password, n_password, db):
             e_password = encrypt_data(n_password)
             db.update_one({"username": username}, {
                 "$set": {"password": e_password}})
+            return True
     else:
         return False
