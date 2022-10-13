@@ -32,7 +32,6 @@ jobs:
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: Test with pytest
       run: |
-        pip install mongomock |
         pytest testing.py
   deploy:
      runs-on: ubuntu-latest
