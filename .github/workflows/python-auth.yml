@@ -14,7 +14,7 @@ permissions:
   
 defaults:
   run:
-    working-directory: BackEnd/CommunityService
+    working-directory: BackEnd/AuthService
 
 jobs:
   build:
