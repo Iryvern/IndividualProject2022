@@ -1,4 +1,8 @@
 from encryption import *
+from authentification import *
+import unittest
+import mongomock
+from mongoengine import connect, disconnect
 
 
 class TestEncryption:
@@ -6,4 +10,14 @@ class TestEncryption:
         var = "Test"
         e_var = encrypt_data(var)
         result = compare_e_data(var, e_var)
+        assert result == True
+
+
+class TestAuthentification:
+    def test_register(self):
+        collection = mongomock.MongoClient().db.collection
+        username = "Test"
+        password = "Test_P"
+        email = "test@gmail.com"
+        result = register(username, password, email, collection)
         assert result == True

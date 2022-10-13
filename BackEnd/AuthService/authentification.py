@@ -1,23 +1,22 @@
-from database import *
 from encryption import *
 import uuid
 
 
-def register(username, password, email):
-    result = collection.find_one({"username": username})
+def register(username, password, email, db):
+    result = db.find_one({"username": username})
     if result is None:
         unique_id = str(uuid.uuid4())
         e_password = encrypt_data(password)
         json_data = {"_id": unique_id,
                      "username": username, "password": e_password, "email": email}
-        add_data(json_data)
+        db.insert_one(json_data)
         return True
     else:
         return False
 
 
-def login(username, password):
-    result = collection.find_one({"username": username})
+def login(username, password, db):
+    result = db.find_one({"username": username})
     if result is not None:
         try:
             response = compare_e_data(password, result["password"])
@@ -32,33 +31,33 @@ def login(username, password):
         return False
 
 
-def change_username(o_username, n_username):
-    result = collection.find_one({"username": o_username})
+def change_username(o_username, n_username, db):
+    result = db.find_one({"username": o_username})
     if result is not None:
-        collection.update_one({"username": o_username}, {
+        db.update_one({"username": o_username}, {
             "$set": {"username": n_username}})
     else:
         return False
 
 
-def change_email(username, email):
-    result = collection.find_one({"username": username})
+def change_email(username, email, db):
+    result = db.find_one({"username": username})
     print(result)
     print(username)
     if result is not None:
-        collection.update_one({"username": username}, {
+        db.update_one({"username": username}, {
             "$set": {"email": email}})
     else:
         return False
 
 
-def change_password(username, o_password, n_password):
-    result = collection.find_one({"username": username})
+def change_password(username, o_password, n_password, db):
+    result = db.find_one({"username": username})
     if result is not None:
         response = compare_e_data(o_password, result["password"])
         if response is True:
             e_password = encrypt_data(n_password)
-            collection.update_one({"username": username}, {
+            db.update_one({"username": username}, {
                 "$set": {"password": e_password}})
     else:
         return False

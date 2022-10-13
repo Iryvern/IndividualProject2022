@@ -6,7 +6,7 @@ from flask_jwt_extended import create_access_token
 from flask_jwt_extended import jwt_required
 from flask_jwt_extended import JWTManager
 from waitress import serve
-import os
+from database import *
 
 white = ["*"]
 
@@ -26,7 +26,7 @@ class Login_Auth(Resource):
     def post(self):
         username = request.json.get("username")
         password = request.json.get("password")
-        response = login(username, password)
+        response = login(username, password, collection)
         if response == True:
             access_token = create_access_token(identity=username)
             return jsonify(access_token=access_token)
@@ -39,7 +39,7 @@ class Register_Auth(Resource):
         username = request.json.get("username")
         password = request.json.get("password")
         email = request.json.get("email")
-        response = register(username, password, email)
+        response = register(username, password, email, collection)
         return response
 
 
@@ -48,7 +48,7 @@ class ChangeUsername_Auth(Resource):
     def post(self):
         n_username = request.json.get("username")
         o_username = request.json.get("o_username")
-        response = change_username(o_username, n_username)
+        response = change_username(o_username, n_username, collection)
         return response
 
 
@@ -57,7 +57,7 @@ class ChangeEmail_Auth(Resource):
     def post(self):
         username = request.json.get("username")
         email = request.json.get("email")
-        response = change_email(username, email)
+        response = change_email(username, email, collection)
         return response
 
 
@@ -67,7 +67,8 @@ class ChangePassword_Auth(Resource):
         username = request.json.get("username")
         o_password = request.json.get("opassword")
         n_password = request.json.get("password")
-        response = change_password(username, o_password, n_password)
+        response = change_password(
+            username, o_password, n_password, collection)
         return response
 
 

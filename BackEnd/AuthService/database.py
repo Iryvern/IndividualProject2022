@@ -5,7 +5,3 @@ cluster = MongoClient(
 
 db = cluster["IndividualDataDB"]
 collection = db["Auth"]
-
-
-def add_data(data):
-    collection.insert_one(data)
