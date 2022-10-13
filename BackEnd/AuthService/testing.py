@@ -20,4 +20,4 @@ class TestAuthentification:
         password = "Test_P"
         email = "test@gmail.com"
         result = register(username, password, email, collection)
-        assert result == True
+        assert result == False
