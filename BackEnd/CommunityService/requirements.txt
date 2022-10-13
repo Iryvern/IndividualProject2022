@@ -5,3 +5,4 @@ pymongo
 uuid
 Flask-Cors
 Flask-JWT-Extended
+mongomock

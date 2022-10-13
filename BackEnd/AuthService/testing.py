@@ -1,8 +1,6 @@
 from encryption import *
 from authentification import *
-import unittest
 import mongomock
-from mongoengine import connect, disconnect
 
 
 class TestEncryption:
@@ -20,4 +18,4 @@ class TestAuthentification:
         password = "Test_P"
         email = "test@gmail.com"
         result = register(username, password, email, collection)
-        assert result == False
+        assert result == True
