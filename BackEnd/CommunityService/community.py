@@ -24,14 +24,6 @@ def delete_community(community, db):
         return False
 
 
-def show_community_with_posts(community, db):
-    result = db.find_one({"community": community})
-    if result is not None:
-        return result
-    else:
-        return False
-
-
 def join_community(username, community, db):
     result = db.find_one({"community": community})
     if result is not None:
@@ -50,6 +42,7 @@ def join_community(username, community, db):
         return False
 
 
+# Make that the creator can't leave the community or if all people are gone, delete the community
 def leave_community(username, community, db):
     result = db.find_one({"community": community})
     if result is not None:
@@ -65,6 +58,7 @@ def leave_community(username, community, db):
         return False
 
 
+# Check if the user is a member of community
 def make_post_in_community(username, post_title, community, db):
     result = db.find_one({"community": community})
     if result is not None:
@@ -75,54 +69,45 @@ def make_post_in_community(username, post_title, community, db):
         updated_posts = current_posts + [new_post]
         db.update_one({"community": community}, {
             "$set": {"posts": updated_posts}})
-        return True
+        return unique_id
     else:
         return False
 
 
-def like_post(post_id, username, db):
-    result = db.find({"_id": post_id})
+def show_community_with_posts(community, db):
+    result = db.find_one({"community": community})
     if result is not None:
-        liked_by = result["liked_by"]
-        if username in liked_by:
-            new_likes = result["likes"]-1
-            new_liked_by = liked_by.remove(username)
+        return result
+    else:
+        return False
+
+
+def delete_post(username, community, post_id, db):
+    result = db.find_one({"community": community})
+    if result is not None:
+        mods = result["mods"]
+        if username in mods:
+            posts = result["posts"]
+            for index in range(len(posts)):
+                post = posts[index]
+                if post["_id"] == post_id:
+                    del posts[index]
+                    break
+                else:
+                    return False
+            db.update_one({"community": community}, {
+                "$set": {"posts": posts}})
+            return True
         else:
-            new_likes = result["likes"]+1
-            new_liked_by = liked_by+[username]
-        db.update_one({"_id": post_id}, {
-            "$set": [{"likes": new_likes}, {"liked_by": new_liked_by}]})
-        return True
+            return False
     else:
         return False
-
-
-def comment_on_post(post_id, username, content, db):
-    result = db.find({"_id": post_id})
-    if result is not None:
-        unique_id = str(uuid.uuid4())
-        current_comments = result["comments"]
-        comment = {"_id": unique_id, "username": username, "content": content,
-                   "date": datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
-        new_comments = current_comments+[comment]
-        db.update_one({"_id": post_id}, {
-            "$set": {"comments": new_comments}, })
-        return True
-    else:
-        return False
-
-
-def show_community_memebrs(community, db):
-    result = db.find({"community": community})
-    if result is not None:
-        return result["members"]
-    else:
-        return False
-
 
 # Rules must be a list of strings
+
+
 def set_community_rules(username, community, rules, db):
-    result = db.find({"community": community})
+    result = db.find_one({"community": community})
     if result is not None:
         mods = result["mods"]
         if username in mods:
@@ -136,51 +121,106 @@ def set_community_rules(username, community, rules, db):
 
 
 def ban_in_community(username, target, community, reason, db):
-    result = db.find({"community": community})
+    result = db.find_one({"community": community})
     if result is not None:
         mods = result["mods"]
         if username in mods:
             current_members = result["members"]
-            new_memebers = current_members.remove(target)
-            db.update_one({"community": community}, {
-                "$set": {"members": new_memebers}})
-            current_mods = result["mods"]
-            if target in current_mods:
-                new_mods = current_mods.remove(target)
+            if target in current_members:
+                new_memebers = current_members.remove(target)
                 db.update_one({"community": community}, {
-                    "$set": {"mods": new_mods}})
-            bans = result["bans"]
-            ban = {"username": username,
-                   "date": datetime.now().strftime('%Y-%m-%d %H:%M:%S'), "reason": reason}
-            new_bans = bans+[ban]
+                    "$set": {"members": new_memebers}})
+                current_mods = result["mods"]
+                if target in current_mods:
+                    new_mods = current_mods.remove(target)
+                    db.update_one({"community": community}, {
+                        "$set": {"mods": new_mods}})
+                bans = result["bans"]
+                ban = {"username": username,
+                       "date": datetime.now().strftime('%Y-%m-%d %H:%M:%S'), "reason": reason}
+                new_bans = bans+[ban]
+                db.update_one({"community": community}, {
+                    "$set": {"bans": new_bans}})
+                return True
+            else:
+                return False
+        else:
+            return False
+    else:
+        return False
+
+
+def like_post(post_id, community, username, db):
+    result = db.find_one({"community": community})
+    if result is not None:
+        posts = result["posts"]
+        for index in range(len(posts)):
+            post = posts[index]
+            if post["_id"] == post_id:
+                liked_by = posts[index]["liked_by"]
+                if username in liked_by:
+                    posts[index]["likes"] -= 1
+                    posts[index]["liked_by"].remove(username)
+                else:
+                    posts[index]["likes"] += 1
+                    posts[index]["liked_by"] += [username]
+                break
+            else:
+                return False
+        db.update_one({"community": community}, {
+            "$set": {"posts": posts}})
+        return True
+    else:
+        return False
+
+
+def comment_on_post(post_id, community, username, content, db):
+    result = db.find_one({"community": community})
+    if result is not None:
+        posts = result["posts"]
+        for index in range(len(posts)):
+            post = posts[index]
+            if post["_id"] == post_id:
+                unique_id = str(uuid.uuid4())
+                comment = {"_id": unique_id, "username": username, "content": content,
+                           "date": datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
+                posts[index]["comments"] += [comment]
+            else:
+                return False
+        db.update_one({"community": community}, {
+            "$set": {"posts": posts}})
+        return unique_id
+    else:
+        return False
+
+
+def show_community_memebrs(community, db):
+    result = db.find_one({"community": community})
+    if result is not None:
+        return result["members"]
+    else:
+        return False
+
+
+def delete_comment(username, community, post_id, comment_id, db):
+    result = db.find_one({"community": community})
+    if result is not None:
+        mods = result["mods"]
+        if username in mods:
+            posts = result["posts"]
+            for index in range(len(posts)):
+                post = posts[index]
+                if post["_id"] == post_id:
+                    comments = posts[index]["comments"]
+                    for index in range(len(comments)):
+                        comment = comments[index]
+                        if comment["_id"] == comment_id:
+                            del comments[index]
+                            break
+                else:
+                    return False
             db.update_one({"community": community}, {
-                "$set": {"bans": new_bans}})
-            return True
-        else:
-            return False
-    else:
-        return False
-
-
-def delete_post(username, community, post_id, db):
-    result = db.find({"community": community})
-    if result is not None:
-        mods = result["mods"]
-        if username in mods:
-            db.delete_one({"_id": post_id})
-            return True
-        else:
-            return False
-    else:
-        return False
-
-
-def delete_comment(username, community, comment_id, db):
-    result = db.find({"community": community})
-    if result is not None:
-        mods = result["mods"]
-        if username in mods:
-            db.delete_one({"_id": comment_id})
+                "$set": {"posts": posts}})
             return True
         else:
             return False
@@ -189,7 +229,7 @@ def delete_comment(username, community, comment_id, db):
 
 
 def upgrade_to_mod(username, community, db):
-    result = db.find({"community": community})
+    result = db.find_one({"community": community})
     if result is not None:
         mods = result["mods"]
         if username not in mods:
@@ -204,7 +244,7 @@ def upgrade_to_mod(username, community, db):
 
 
 def downgrade_to_user(username, community, db):
-    result = db.find({"community": community})
+    result = db.find_one({"community": community})
     if result is not None:
         mods = result["mods"]
         if username in mods:
