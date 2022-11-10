@@ -5,6 +5,8 @@ name: Python application
 
 on:
   push:
+    paths:
+      - BackEnd/CommunityService/**
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
