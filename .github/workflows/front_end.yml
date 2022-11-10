@@ -8,7 +8,7 @@ on:
 
 defaults:
   run:
-    working-directory: ./FrontEnd
+    working-directory: FrontEnd
 
 jobs:
   build:
@@ -26,6 +26,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
+        cache-dependency-path: FrontEnd/package-lock.json
     - run: npm ci
     - run: npm run build 
     
