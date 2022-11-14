@@ -5,6 +5,8 @@ name: Python application
 
 on:
   push:
+    paths:
+      - BackEnd/CommunityService/**
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
@@ -35,3 +37,19 @@ jobs:
     - name: Test with pytest
       run: |
         python -m pytest testing.py
+  
+  deploy:
+     runs-on: ubuntu-latest
+     steps:
+     - uses: actions/checkout@v3
+     - name: Dockerizing
+       run: |
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/community_api:latest .
+     -
+       name: Login to DockerHub
+       run: |
+          docker login --username ${{ secrets.DOCKERHUB_USERNAME }} --password ${{ secrets.DOCKERHUB_TOKEN }}
+     -
+       name: Push Docker
+       run: |
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/community_api:latest
