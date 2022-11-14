@@ -15,5 +15,5 @@ EXPOSE 5000
 
 CMD ["python", "server.py"]
 
-#docker build -t api .
+#docker build -t a_api .
 #docker run -p 5000:5000 -it api

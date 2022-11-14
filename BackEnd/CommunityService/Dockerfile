@@ -15,5 +15,5 @@ EXPOSE 5001
 CMD ["flask", "run"]
 
 
-#docker build -t api .
+#docker build -t c_api . 
 #docker run -p 5001:5001 -it api

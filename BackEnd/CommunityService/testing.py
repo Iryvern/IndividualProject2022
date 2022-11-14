@@ -138,7 +138,7 @@ class TestCommunity:
         make_post_in_community(username, post_title, community, collection)
         community_posts = show_community_with_posts(community, collection)
         post_id = community_posts["posts"][0]["_id"]
-        result = delete_post(username, community, post_id, collection)
+        result = delete_post(post_id, collection)
         assert result == True
 
     def test_like_post(self):

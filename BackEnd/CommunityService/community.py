@@ -15,11 +15,11 @@ def create_community(username, community, db):
         return False
 
 
-# Make it so it blocks all users except admins to see the community
 def delete_community(community, db):
     result = db.find_one({"community": community})
-    if result is None:
-        return False
+    if result is not None:
+        db.delete_one({"community": community})
+        return True
     else:
         return False
 
@@ -82,24 +82,11 @@ def show_community_with_posts(community, db):
         return False
 
 
-def delete_post(username, community, post_id, db):
-    result = db.find_one({"community": community})
+def delete_post(post_id, db):
+    result = db.find_one({"posts._id": post_id})
     if result is not None:
-        mods = result["mods"]
-        if username in mods:
-            posts = result["posts"]
-            for index in range(len(posts)):
-                post = posts[index]
-                if post["_id"] == post_id:
-                    del posts[index]
-                    break
-                else:
-                    return False
-            db.update_one({"community": community}, {
-                "$set": {"posts": posts}})
-            return True
-        else:
-            return False
+        db.delete_one({"posts._id": post_id})
+        return True
     else:
         return False
 
