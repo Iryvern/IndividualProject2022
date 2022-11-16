@@ -19,6 +19,12 @@ defaults:
     working-directory: BackEnd/AuthService
 
 jobs:
+  pip-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: pypa/gh-action-pip-audit@v1.0.0
+        with:
+          inputs: requirements.txt
   build:
     runs-on: ubuntu-latest
     steps:
