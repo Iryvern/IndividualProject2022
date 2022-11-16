@@ -13,7 +13,8 @@ white = ["*"]
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": white, "send_wildcard": "False"}})
 api = Api(app)
-app.config["JWT_SECRET_KEY"] = "ZOl9P^8Ag9K6O2JCmjc&"  # Hide this!
+# Hide this in an environemnt in github.
+app.config["JWT_SECRET_KEY"] = "ZOl9P^8Ag9K6O2JCmjc&"
 jwt = JWTManager(app)
 
 
