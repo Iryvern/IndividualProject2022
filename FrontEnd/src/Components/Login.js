@@ -7,7 +7,7 @@ class Login extends Component {
 		password: "",};
 
 	handleLogIn = async () => {
-		const headers = {"Content-type":"application/json"}
+		const headers = {"Content-type":"application/json"}//Need to be more secure
 		const res = await axios.post('http://127.0.0.1:5000/login', { username: this.state.username , password: this.state.password},{headers:headers});
 		if(res.data!==false){
 			sessionStorage.setItem("token",res.data["access_token"])

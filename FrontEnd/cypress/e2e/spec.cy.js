@@ -17,6 +17,5 @@ describe('Register', () => {
     cy.get('.Input:nth-child(3) > .Password').type('tester');
     cy.get('p:nth-child(4) > button').click();
     cy.url().should('contains', 'http://localhost:3000/');
-    cy.url().should('contains', 'http://localhost:3000/');
   })
 })
