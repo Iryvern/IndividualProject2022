@@ -31,18 +31,7 @@ jobs:
         cache-dependency-path: FrontEnd/package-lock.json
     - run: npm ci
     - run: npm run build 
-    
-  e2e-test:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out repository code
-        uses: actions/checkout@v2
-
-      - name: run cypress tests with firefox
-        uses: cypress-io/github-action@v2
-        timeout-minutes: 10
-        with:
-          browser: firefox
+        
   deploy:
      runs-on: ubuntu-latest
      steps:
