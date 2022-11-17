@@ -6,7 +6,7 @@ name: Python application
 on:
   push:
     paths:
-      - BackEnd/AuthService/**
+      - BackEnd/LogService/**
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
