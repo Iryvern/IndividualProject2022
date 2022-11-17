@@ -1,0 +1,51 @@
+# This workflow will install Python dependencies, run tests and lint with a single version of Python
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
+
+name: Python application
+
+on:
+  push:
+    paths:
+      - BackEnd/AuthService/**
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+  
+defaults:
+  run:
+    working-directory: BackEnd/LogService
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python 3.9.6
+      uses: actions/setup-python@v3
+      with:
+        python-version: "3.9.6"
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pytest
+        pip install -r requirements.txt
+
+  deploy:
+     runs-on: ubuntu-latest
+     steps:
+     - uses: actions/checkout@v3
+     - name: Dockerizing
+       run: |
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/log_api:latest .
+     -
+       name: Login to DockerHub
+       run: |
+          docker login --username ${{ secrets.DOCKERHUB_USERNAME }} --password ${{ secrets.DOCKERHUB_TOKEN }}
+     -
+       name: Push Docker
+       run: |
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/log_api:latest
+    
