@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import Login from "./Components/Login.js";
-import Register from "./Components/Register.js";
-import LogInStatus from "./Components/LogInStatus.js";
-import Profile from "./Components/Profile.js";
+import Navigationbar from "./Components/Navigationbar.js";
+import Logo from "./Components/images/tempuslogo.png";
 
 import './App.css';
 
@@ -14,10 +12,16 @@ class App extends Component {
 		return (
 		<React.Fragment>
 		<main>
-			<LogInStatus/>
-			<Login />
-			<Register />
-			<Profile />
+			<Navigationbar/>
+			<h1 style = {{paddingLeft:"35%"}}>Welcome to TempusReality</h1>
+			<img
+					src={Logo}
+					height="100"
+					width="125"
+					className="m-2"
+					alt="Company Logo"
+					style = {{paddingLeft:"45%"}}
+			/>
 		</main>
 		</React.Fragment>
 		);
