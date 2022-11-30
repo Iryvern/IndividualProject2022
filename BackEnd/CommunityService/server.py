@@ -5,15 +5,12 @@ from flask_restful import Api, Resource
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import jwt_required
 from flask_jwt_extended import JWTManager
-from flask_wtf.csrf import CSRFProtect
 from community import *
 from database import *
 
 white = ["*"]
 
 app = Flask(__name__)
-csrf = CSRFProtect()
-csrf.init_app(app)
 CORS(app, resources={r"/*": {"origins": white, "send_wildcard": "False"}})
 api = Api(app)
 app.config["JWT_SECRET_KEY"] = "ZOl9P^8Ag9K6O2JCmjc&"  # Hide this!
@@ -51,7 +48,7 @@ class Delete_Community(Resource):
 
 
 class Join_Community(Resource):
-    def post(self):
+    def get(self):
         username = request.args.get("username")
         community = request.args.get("community")
         result = join_community(username, community, collection)
@@ -62,7 +59,7 @@ class Join_Community(Resource):
 
 
 class Leave_Community(Resource):
-    def post(self):
+    def get(self):
         username = request.args.get("username")
         community = request.args.get("community")
         result = leave_community(username, community, collection)
@@ -133,10 +130,11 @@ class Ban_In_Community(Resource):
 
 
 class Like_Post(Resource):
-    def post(self):
+    def get(self):
         username = request.args.get("username")
         community = request.args.get("community")
         post_id = request.args.get("post_id")
+        print(username, community, post_id)
         result = like_post(post_id, community, username, collection)
         if result != None:
             return True

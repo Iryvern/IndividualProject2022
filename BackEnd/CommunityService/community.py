@@ -38,15 +38,18 @@ def join_community(username, community, db):
         if username not in result["bans"]:
             current_members = result["members"]
             if username in current_members:
+                print("user is already a member")
                 return False
             else:
                 new_memebers = current_members+[username]
                 db.update_one({"community": community}, {
                     "$set": {"members": new_memebers}})
-                return True
+                return new_memebers
         else:
+            print("user is banned")
             return False
     else:
+        print("community doesn't exist")
         return False
 
 
@@ -56,9 +59,9 @@ def leave_community(username, community, db):
     if result is not None:
         current_members = result["members"]
         if username in current_members:
-            new_memebers = current_members.remove(username)
+            current_members.remove(username)
             db.update_one({"community": community}, {
-                "$set": {"members": new_memebers}})
+                "$set": {"members": current_members}})
             return True
         else:
             return False
