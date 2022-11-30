@@ -6,6 +6,8 @@ import reportWebVitals from './reportWebVitals';
 import LoginPage from "./Pages/LoginPage";
 import RegisterPage from "./Pages/RegisterPage";
 import ProfilePage from "./Pages/ProfilePage";
+import CommunityAllPage from "./Pages/CommunityAllPage";
+import CommunityPage from "./Pages/CommunityPage";
 import {  BrowserRouter,Routes, Route } from "react-router-dom";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -18,7 +20,8 @@ root.render(
         <Route path="/register" element={<RegisterPage/>} />
         <Route path="/profile" element={<ProfilePage/>} />
         <Route path="/ar" element={""} />
-        <Route path="/communties" element={""} />
+        <Route path="/communities" element={<CommunityAllPage/>} />
+        <Route path="/community" element={<CommunityPage/>} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

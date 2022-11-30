@@ -8,9 +8,8 @@ const isLoggedIn = (token && token !== "" && token !== undefined)? true:false
 class Navigationbar extends Component{
   
   handleLogOut  = () => {
-		localStorage.removeItem("token")
-        window.location("/");
-        window.location.reload(false)
+		  localStorage.removeItem("token")
+      window.location = "/";
 		}
 
 

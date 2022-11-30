@@ -3,6 +3,14 @@ import uuid
 from datetime import datetime
 
 
+def get_all_communities(db):
+    result = list(db.find())
+    if result is not None:
+        return result
+    else:
+        return False
+
+
 def create_community(username, community, db):
     result = db.find_one({"community": community})
     if result is None:
@@ -59,12 +67,12 @@ def leave_community(username, community, db):
 
 
 # Check if the user is a member of community
-def make_post_in_community(username, post_title, community, db):
+def make_post_in_community(username, post_title, content, community, db):
     result = db.find_one({"community": community})
     if result is not None:
         current_posts = result["posts"]
         unique_id = str(uuid.uuid4())
-        new_post = {"_id": unique_id, "creator": username, "title": post_title, "likes": 0, "liked_by": [],
+        new_post = {"_id": unique_id, "creator": username, "content": content, "title": post_title, "likes": 0, "liked_by": [],
                     "n_comments": 0, "comments": [], "date": datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
         updated_posts = current_posts + [new_post]
         db.update_one({"community": community}, {

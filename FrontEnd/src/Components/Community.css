@@ -1,0 +1,17 @@
+.post{
+    background-color: darkcyan;
+        width: 30em;
+        margin-bottom: 2em;
+        padding-bottom: 1em;
+        padding: 0.5em;
+}
+
+.post button {
+    width: 7em;
+    margin-right: 5%;
+}
+
+.top button, h1{
+    width: 7em;
+    margin-left: 0.5%;
+}

@@ -10,9 +10,9 @@ class Login extends Component {
 		const headers = {"Content-type":"application/json"}//Need to be more secure
 		const res = await axios.post('http://127.0.0.1:8080/login', { username: this.state.username , password: this.state.password},{headers:headers});
 		if(res.data!==false){
-			localStorage.setItem("token",res.data["access_token"])
-			localStorage.setItem("username",this.state.username)
-			window.location.reload(false)
+			localStorage.setItem("token",res.data["access_token"]);
+			localStorage.setItem("username",this.state.username);
+			window.location = "/";
 		}
 		else{
 			console.log("Could not log in")

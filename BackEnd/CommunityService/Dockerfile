@@ -10,7 +10,7 @@ ENV FLASK_RUN_HOST=0.0.0.0
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
-EXPOSE 5001
+EXPOSE 8081
 
 CMD ["flask", "run"]
 
