@@ -7,14 +7,14 @@ from flask_jwt_extended import jwt_required
 from flask_jwt_extended import JWTManager
 from waitress import serve
 from database import *
+import os
 
 white = ["*"]
 
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": white, "send_wildcard": "False"}})
 api = Api(app)
-# Hide this in an environemnt in github.
-app.config["JWT_SECRET_KEY"] = "ZOl9P^8Ag9K6O2JCmjc&"
+app.config["JWT_SECRET_KEY"] = os.environ["JWT_SECRET_KEY"]
 jwt = JWTManager(app)
 
 
@@ -26,7 +26,7 @@ def test():
 class Login_Auth(Resource):
     def post(self):
         username = request.json.get("username")
-        password = request.json.get("password")
+        password = request.json .get("password")
         response = login(username, password, collection)
         if response == True:
             access_token = create_access_token(identity=username)
@@ -80,4 +80,5 @@ api.add_resource(ChangeEmail_Auth, "/change/email")
 api.add_resource(ChangePassword_Auth, "/change/password")
 
 if __name__ == "__main__":
-    serve(app, host="0.0.0.0", port=8080)
+    #serve(app, host="0.0.0.0", port=8080)
+    app.run(debug=True, port=8080)

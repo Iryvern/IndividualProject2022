@@ -6,14 +6,14 @@ from flask_jwt_extended import jwt_required
 from flask_jwt_extended import JWTManager
 from waitress import serve
 from logservice import *
+import os
 
 white = ["*"]
 
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": white, "send_wildcard": "False"}})
 api = Api(app)
-# Hide this in an environemnt in github.
-app.config["JWT_SECRET_KEY"] = "ZOl9P^8Ag9K6O2JCmjc&"
+app.config["JWT_SECRET_KEY"] = os.environ["JWT_SECRET_KEY"]
 jwt = JWTManager(app)
 
 

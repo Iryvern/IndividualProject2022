@@ -7,8 +7,9 @@ def register(username, password, email, db):
     if result is None:
         unique_id = str(uuid.uuid4())
         e_password = encrypt_data(password)
+        e_email = encrypt_data(email)
         json_data = {"_id": unique_id,
-                     "username": username, "password": e_password, "email": email}
+                     "username": username, "password": e_password, "email": e_email}
         db.insert_one(json_data)
         return True
     else:

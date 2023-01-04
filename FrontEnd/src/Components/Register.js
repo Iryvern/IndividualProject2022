@@ -19,7 +19,7 @@ class Register extends Component {
 	}
 
 	Register = async () => {
-		const result = await axios.post('http://127.0.0.1:5000/register', { username: this.state.username , password: this.state.password, email: this.state.email});
+		const result = await axios.post('http://127.0.0.1:8080/register', { username: this.state.username , password: this.state.password, email: this.state.email});
 		console.log(result)
 	};
 	
@@ -73,6 +73,7 @@ class Register extends Component {
 						onChange={this.handleUserInput}
 					></input>
 				</p>
+				<input type="checkbox" required id="agree">Besides the email no other personal data will be collected</input>
 				<p>
 					<button onClick={this.handleRegister}>Register</button>
 				</p>

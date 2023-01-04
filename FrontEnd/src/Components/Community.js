@@ -45,8 +45,8 @@ class Community extends Component {
 			});
 	};
 
-    handleComment = async (community_name) => {
-		
+    handleComment = async (post_id) => {
+		window.location = "/comments?p="+post_id;
 	};
 
 	render()  {
@@ -75,7 +75,7 @@ class Community extends Component {
                                 <h2>{post.date}</h2>
                                 <p>
                                     <button onClick={() => this.handleLike(post._id)}>Like</button>
-                                    <button onClick={() => this.handleComment()}>Comment</button>
+                                    <button onClick={() => this.handleComment(post._id)}>Comment</button>
                                 </p>
                             </div>
                         ))}

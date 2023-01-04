@@ -7,13 +7,14 @@ from flask_jwt_extended import jwt_required
 from flask_jwt_extended import JWTManager
 from community import *
 from database import *
+import os
 
 white = ["*"]
 
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": white, "send_wildcard": "False"}})
 api = Api(app)
-app.config["JWT_SECRET_KEY"] = "ZOl9P^8Ag9K6O2JCmjc&"  # Hide this!
+app.config["JWT_SECRET_KEY"] = os.environ["JWT_SECRET_KEY"]
 jwt = JWTManager(app)
 
 
@@ -75,10 +76,20 @@ class Post_In_Community(Resource):
         community = request.args.get("community")
         post_title = request.args.get("post_title")
         content = request.args.get("content")
-        result = make_post_in_community(
+        result = make_post_in_community2(
             username, post_title, content, community, collection)
         if result != None:
             return True
+        else:
+            return False
+
+
+class Get_Post(Resource):
+    def get(self):
+        post_id = request.args.get("post_id")
+        result = get_post(post_id, collection)
+        if result != None:
+            return result
         else:
             return False
 
@@ -218,6 +229,7 @@ api.add_resource(Community_Members, "/c-members")
 api.add_resource(Delete_Comment, "/co-delete")
 api.add_resource(Upgrade_User_To_Mod, "/u-upgrade")
 api.add_resource(Downgrade_To_User, "/u-dowgrade")
+api.add_resource(Get_Post, "/p-get")
 
 if __name__ == "__main__":
     app.run(debug=True, port=8081)

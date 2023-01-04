@@ -8,6 +8,7 @@ import RegisterPage from "./Pages/RegisterPage";
 import ProfilePage from "./Pages/ProfilePage";
 import CommunityAllPage from "./Pages/CommunityAllPage";
 import CommunityPage from "./Pages/CommunityPage";
+import CommentPage from "./Pages/CommentPage";
 import {  BrowserRouter,Routes, Route } from "react-router-dom";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -22,6 +23,7 @@ root.render(
         <Route path="/ar" element={""} />
         <Route path="/communities" element={<CommunityAllPage/>} />
         <Route path="/community" element={<CommunityPage/>} />
+        <Route path="/comments" element={<CommentPage/>} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

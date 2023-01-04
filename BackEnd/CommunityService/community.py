@@ -85,6 +85,15 @@ def make_post_in_community(username, post_title, content, community, db):
         return False
 
 
+def make_post_in_community2(username, post_title, content, community, db):
+    unique_id = str(uuid.uuid4())
+    new_post = {"_id": unique_id, "creator": username, "content": content, "title": post_title, "likes": 0, "liked_by": [],
+                "n_comments": 0, "comments": [], "date": datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
+    db.update_one({"community": community}, {
+        "$push": {"posts": new_post}})
+    return True
+
+
 def show_community_with_posts(community, db):
     result = db.find_one({"community": community})
     if result is not None:
@@ -168,6 +177,18 @@ def like_post(post_id, community, username, db):
         db.update_one({"community": community}, {
             "$set": {"posts": posts}})
         return True
+    else:
+        return False
+
+
+def get_post(post_id, db):
+    result = db.find_one({"posts._id": post_id})
+    if result is not None:
+        posts = result["posts"]
+        for index in range(len(posts)):
+            post = posts[index]
+            if post["_id"] == post_id:
+                return post
     else:
         return False
 
