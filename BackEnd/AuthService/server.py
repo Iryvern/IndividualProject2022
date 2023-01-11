@@ -88,5 +88,5 @@ api.add_resource(ChangeEmail_Auth, "/change/email")
 api.add_resource(ChangePassword_Auth, "/change/password")
 
 if __name__ == "__main__":
-    serve(app)
+    serve(app,  port=8080)
     #app.run(debug=True, port=8080)
