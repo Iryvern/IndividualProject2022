@@ -15,7 +15,6 @@ app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": white, "send_wildcard": "False"}})
 api = Api(app)
 #app.config["JWT_SECRET_KEY"] = os.environ["JWT_SECRET_KEY"]
-# Fix needed
 app.config["JWT_SECRET_KEY"] = "ZOl9P^8Ag9K6O2JCmjc&"
 jwt = JWTManager(app)
 
