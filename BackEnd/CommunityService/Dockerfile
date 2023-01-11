@@ -10,10 +10,9 @@ ENV FLASK_RUN_HOST=0.0.0.0
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
-EXPOSE 8081
+#EXPOSE 8081
 
-CMD ["flask", "run"]
+CMD ["python", "server.py"]
 
-
-#docker build -t c_api . 
-#docker run -p 5001:5001 -it api
+#docker build -t c-api .
+#docker run -p 8081:8081 -it c-api

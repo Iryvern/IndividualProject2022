@@ -5,6 +5,7 @@ from flask_restful import Api, Resource
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import jwt_required
 from flask_jwt_extended import JWTManager
+from waitress import serve
 from community import *
 from database import *
 import os
@@ -215,6 +216,12 @@ class Downgrade_To_User(Resource):
             return False
 
 
+class Visit(Resource):
+    def get(self):
+        return "Hello World"
+
+
+api.add_resource(Visit, "/")
 api.add_resource(Get_Communities, "/a-communities")
 api.add_resource(Create_Community, "/c-create")
 api.add_resource(Delete_Community, "/c-delete")
@@ -234,4 +241,5 @@ api.add_resource(Downgrade_To_User, "/u-dowgrade")
 api.add_resource(Get_Post, "/p-get")
 
 if __name__ == "__main__":
-    app.run(debug=True, port=8081)
+    serve(app)
+    #app.run(debug=True, port=8081)

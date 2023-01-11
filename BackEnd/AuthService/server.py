@@ -75,6 +75,12 @@ class ChangePassword_Auth(Resource):
         return response
 
 
+class Visit(Resource):
+    def get(self):
+        return "Hello World"
+
+
+api.add_resource(Visit, "/")
 api.add_resource(Login_Auth, "/login")
 api.add_resource(Register_Auth, "/register")
 api.add_resource(ChangeUsername_Auth, "/change/username")
@@ -82,5 +88,5 @@ api.add_resource(ChangeEmail_Auth, "/change/email")
 api.add_resource(ChangePassword_Auth, "/change/password")
 
 if __name__ == "__main__":
-    #serve(app, host="0.0.0.0", port=8080)
-    app.run(debug=True, port=8080)
+    serve(app)
+    #app.run(debug=True, port=8080)

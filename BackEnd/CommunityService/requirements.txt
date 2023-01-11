@@ -4,5 +4,6 @@ PyNaCl
 pymongo
 uuid
 Flask-Cors
+waitress
 Flask-JWT-Extended
 mongomock
