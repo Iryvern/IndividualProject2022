@@ -14,3 +14,5 @@ collection = db["Community"]
 
 def add_data(data):
     collection.insert_one(data)
+
+# Security

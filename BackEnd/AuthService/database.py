@@ -10,3 +10,5 @@ cluster = MongoClient(
 
 db = cluster["IndividualDataDB"]
 collection = db["Auth"]
+
+# Security

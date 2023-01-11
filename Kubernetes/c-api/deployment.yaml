@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: c-api
+  labels:
+    app: c-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: c-api
+  template:
+    metadata:
+      labels:
+        app: c-api
+    spec:
+      containers:
+        - name: c-api
+          image: iryvern/community_api:latest
+          ports:
+            - containerPort: 8081
