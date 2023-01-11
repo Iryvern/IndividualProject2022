@@ -12,6 +12,7 @@ import os
 white = ["*"]
 
 app = Flask(__name__)
+# Whitelist
 CORS(app, resources={r"/*": {"origins": white, "send_wildcard": "False"}})
 api = Api(app)
 #app.config["JWT_SECRET_KEY"] = os.environ["JWT_SECRET_KEY"]
