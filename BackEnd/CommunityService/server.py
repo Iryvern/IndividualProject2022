@@ -218,7 +218,7 @@ class Downgrade_To_User(Resource):
 
 class Visit(Resource):
     def get(self):
-        return "Hello World"
+        return "Hello Community"
 
 
 api.add_resource(Visit, "/")

@@ -77,7 +77,7 @@ class ChangePassword_Auth(Resource):
 
 class Visit(Resource):
     def get(self):
-        return "Hello World"
+        return "Hello Authenticator"
 
 
 api.add_resource(Visit, "/")
