@@ -1,7 +1,5 @@
 import nacl.pwhash
 
-# Encrypts with the latest technology
-
 
 def encrypt_data(string):
     string_b = bytes(string, encoding='utf-8')
