@@ -35,7 +35,7 @@ jobs:
     - name: Test with pytest
       run: |
         python -m pytest testing.py
-  deploy:
+  dockerize:
      runs-on: ubuntu-latest
      steps:
      - uses: actions/checkout@v3
@@ -50,4 +50,22 @@ jobs:
        name: Push Docker
        run: |
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/auth_api:latest
+          
+  deploy:
+    name: Deploy to Kubernetes
+    runs-on: ubuntu-latest
+    needs: [dockerize]
+    steps:
+    - name: Checkout master 
+      uses: actions/checkout@v2
+    - name: Install doctl
+      uses: digitalocean/action-doctl@v2
+      with:
+        token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+    - name: Save DigitalOcean kubeconfig with short-lived credentials
+      run: doctl kubernetes cluster kubeconfig save --expiry-seconds 600 tempus-reality
+    - name: Deploy to DigitalOcean Kubernetes
+      run: kubectl apply -f ${{ github.workspace }}/Kubernetes/a_api/
+    - name: Verify deployments
+      run: kubectl rollout status deployment/a_api
     
