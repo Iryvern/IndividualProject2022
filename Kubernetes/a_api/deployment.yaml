@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: a_api
+  labels:
+    app: a_api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: a_api
+  template:
+    metadata:
+      labels:
+        app: a_api
+    spec:
+      containers:
+        - name: a_api
+          image: iryvern/auth_api:latest
+          ports:
+            - containerPort: 8080
