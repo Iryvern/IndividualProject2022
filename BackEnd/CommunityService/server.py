@@ -79,7 +79,7 @@ class Post_In_Community(Resource):
         community = request.args.get("community")
         post_title = request.args.get("post_title")
         content = request.args.get("content")
-        result = make_post_in_community2(
+        result = make_post_in_community(
             username, post_title, content, community, collection)
         if result != None:
             return True
