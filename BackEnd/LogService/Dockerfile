@@ -11,8 +11,6 @@ RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
 
-EXPOSE 5002
-
 CMD ["python", "server.py"]
 
 #docker build -t a_api .
