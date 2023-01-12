@@ -3,7 +3,7 @@ import Navigationbar from "./Components/Navigationbar.js";
 import Logo from "./Components/images/tempuslogo.png";
 
 import './App.css';
-//Testing
+//Test
 class App extends Component {
 	state = {
 	};
