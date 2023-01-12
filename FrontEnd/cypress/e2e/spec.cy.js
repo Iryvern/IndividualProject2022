@@ -11,7 +11,7 @@ describe('Login', () => {
     cy.get('.link:nth-child(5)').click();
   })
 })
-//LMAO
+//LMA
 /*describe('Register', () => {
   it('Registration works', () => {
     cy.visit('http://134.209.135.45/');
