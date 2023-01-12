@@ -19,3 +19,5 @@ describe('Register', () => {
     cy.url().should('contains', 'http://134.209.135.45/');
   })
 })
+
+//Test
