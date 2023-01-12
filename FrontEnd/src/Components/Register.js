@@ -30,6 +30,7 @@ class Register extends Component {
 		}
 
 	render() {
+		
 		return (
 			<main className="Register">
 				<h1>Register</h1>
@@ -63,7 +64,7 @@ class Register extends Component {
 						onChange={this.handleUserInput}
 					></input>
 				</p>
-                <p className="Input">
+				<p className="Input">
 					<input className="Password"
 						type="password"
 						placeholder="Repeated Password"
@@ -73,13 +74,15 @@ class Register extends Component {
 						onChange={this.handleUserInput}
 					></input>
 				</p>
-				<input type="checkbox" required id="agree">Besides the email no other personal data will be collected</input>
+				<p required style={{float:"left"}}>Besides the email no other personal data will be collected</p>
+				<input style={{marginTop:"1.7em"}} type="checkbox"></input>
 				<p>
 					<button onClick={this.handleRegister}>Register</button>
 				</p>
+		
 			</main>
 		);
-	}
+		}
 }
 
 export default Register;

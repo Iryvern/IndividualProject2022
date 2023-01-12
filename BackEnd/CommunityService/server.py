@@ -93,7 +93,6 @@ class Post_In_Community(Resource):
 
 
 class Get_Post(Resource):
-    @jwt_required()
     def get(self):
         post_id = request.args.get("post_id")
         result = get_post(post_id, collection)
@@ -104,7 +103,6 @@ class Get_Post(Resource):
 
 
 class Get_Community(Resource):
-    @jwt_required()
     def get(self):
         community = request.args.get("community")
         result = show_community_with_posts(community, collection)
@@ -154,7 +152,6 @@ class Ban_In_Community(Resource):
 
 
 class Like_Post(Resource):
-    @jwt_required()
     def get(self):
         username = request.args.get("username")
         community = request.args.get("community")
@@ -183,7 +180,6 @@ class Comment_Post(Resource):
 
 
 class Community_Members(Resource):
-    @jwt_required()
     def post(self):
         community = request.args.get("community")
         result = show_community_memebrs(community, collection)
