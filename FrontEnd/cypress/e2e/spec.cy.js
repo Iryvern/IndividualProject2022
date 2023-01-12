@@ -1,6 +1,6 @@
 describe('Register', () => {
   it('Registration works', () => {
-    cy.visit('http://localhost:3000/');
+    cy.visit('http://134.209.135.45/');
     cy.get('.Register .Username').click();
     cy.get('.Register .Username').type('tester');
     cy.get('.Input:nth-child(3) > .Email').click();
@@ -16,6 +16,6 @@ describe('Register', () => {
     cy.get('.Input:nth-child(3) > .Password').click();
     cy.get('.Input:nth-child(3) > .Password').type('tester');
     cy.get('p:nth-child(4) > button').click();
-    cy.url().should('contains', 'http://localhost:3000/');
+    cy.url().should('contains', 'http://134.209.135.45/');
   })
 })
