@@ -1,6 +1,6 @@
 from encryption import *
 import uuid
-# L
+# L2
 
 
 def register(username, password, email, db):
