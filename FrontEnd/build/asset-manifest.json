@@ -1,15 +1,17 @@
 {
   "files": {
-    "main.css": "/static/css/main.e6c13ad2.css",
-    "main.js": "/static/js/main.8c4bca34.js",
+    "main.css": "/static/css/main.d1b28244.css",
+    "main.js": "/static/js/main.c8382290.js",
     "static/js/787.22edae46.chunk.js": "/static/js/787.22edae46.chunk.js",
+    "static/media/backgroundlogin.jpg": "/static/media/backgroundlogin.8741a9f40428315441ae.jpg",
+    "static/media/tempuslogo.png": "/static/media/tempuslogo.08556789a9acfb36701e.png",
     "index.html": "/index.html",
-    "main.e6c13ad2.css.map": "/static/css/main.e6c13ad2.css.map",
-    "main.8c4bca34.js.map": "/static/js/main.8c4bca34.js.map",
+    "main.d1b28244.css.map": "/static/css/main.d1b28244.css.map",
+    "main.c8382290.js.map": "/static/js/main.c8382290.js.map",
     "787.22edae46.chunk.js.map": "/static/js/787.22edae46.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.e6c13ad2.css",
-    "static/js/main.8c4bca34.js"
+    "static/css/main.d1b28244.css",
+    "static/js/main.c8382290.js"
   ]
 }

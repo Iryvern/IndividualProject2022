@@ -12,7 +12,7 @@ class CommunitityAll extends Component {
     getAll = async () => {
 		axios
 			.get(
-				"http://127.0.0.1:8081/a-communities"
+				"http://188.166.201.183/a-communities"
 			)
 			.then((res) => {
 				this.setState({ communties: res.data });

@@ -17,8 +17,8 @@ class LogInStatus extends Component {
         const data = {
             name: "Test"
         };
-        console.log('http://127.0.0.1:5000/test',data,{headers:headers})
-		const res = await axios.post('http://127.0.0.1:5000/test',data,{headers:headers});
+        console.log('http://159.223.240.163/test',data,{headers:headers})
+		const res = await axios.post('http://159.223.240.163/test',data,{headers:headers});
         console.log(res)
 		}
 

@@ -22,7 +22,7 @@ class Comments extends Component {
 		}
     
     getPost = async () => {
-		axios.get("http://127.0.0.1:8081/p-get", {headers: {"Content-Type": "application/json"}, params: {"post_id": post_id}})
+		axios.get("http://188.166.201.183/p-get", {headers: {"Content-Type": "application/json"}, params: {"post_id": post_id}})
 			.then((res) => {
 				this.setState({ post: res.data});
                 console.log(this.state.post.comments);

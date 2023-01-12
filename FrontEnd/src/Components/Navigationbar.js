@@ -19,7 +19,6 @@ class Navigationbar extends Component{
      return (
 			<div className="navigation">
         <Link className='link' to="/">Home</Link>
-				<Link className='link' to="/ar">AR</Link>
         <Link className='link' to="/communities">Communities</Link>
         {(isLoggedIn === true)? "":
 				[<Link key="1" className='link' to="/login">Login</Link>,

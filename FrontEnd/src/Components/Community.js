@@ -17,7 +17,7 @@ class Community extends Component {
     }
     
     getAllPosts = async () => {
-		axios.get("http://127.0.0.1:8081/community", {headers: {"Content-Type": "application/json"}, params: {"community": community_name}})
+		axios.get("http://188.166.201.183/community", {headers: {"Content-Type": "application/json"}, params: {"community": community_name}})
 			.then((res) => {
 				this.setState({ posts: res.data.posts });
                 this.setState({ members: res.data.members});
@@ -25,21 +25,21 @@ class Community extends Component {
 	};
 
     handleJoin = async () => {
-        axios.get("http://127.0.0.1:8081/c-join", {headers: {"Content-Type": "application/json"}, params: {"community":community_name, "username":username}})
+        axios.get("http://188.166.201.183/c-join", {headers: {"Content-Type": "application/json"}, params: {"community":community_name, "username":username}})
 			.then((res) => {
 				window.location.reload(false);
 			});
 	};
 
     handleLeave = async () => {
-     axios.get("http://127.0.0.1:8081/c-leave", {headers: {"Content-Type": "application/json"}, params: {"community":community_name, "username":username}})
+     axios.get("http://188.166.201.183/c-leave", {headers: {"Content-Type": "application/json"}, params: {"community":community_name, "username":username}})
 			.then((res) => {
 				window.location.reload(false);
 			});
 	};
 
     handleLike = async (post_id) => {
-		axios.get("http://127.0.0.1:8081/p-like", {headers: {"Content-Type": "application/json"}, params: {"post_id":post_id,"community":community_name, "username":username}})
+		axios.get("http://188.166.201.183/p-like", {headers: {"Content-Type": "application/json"}, params: {"post_id":post_id,"community":community_name, "username":username}})
 			.then((res) => {
 				window.location.reload(false);
 			});

@@ -15,18 +15,18 @@ class Profile extends Component {
 		}
 
     handleChangeUsername =  async () => {
-		const result = await axios.post('http://127.0.0.1:5000/change/username', { o_username: name, username: this.state.username},{headers:headers});
+		const result = await axios.post('http://159.223.240.163/change/username', { o_username: name, username: this.state.username},{headers:headers});
 		console.log(result)
     }
 
     handleChangeEmail =  async () => {
-		const result = await axios.post('http://127.0.0.1:5000/change/email', { username: name , email: this.state.email},{headers:headers});
+		const result = await axios.post('http://159.223.240.163/change/email', { username: name , email: this.state.email},{headers:headers});
 		console.log(result)
     }
 
     handleChangePassword =  async () => {
         if(this.state.password === this.state.rpassword){
-			const result = await axios.post('http://127.0.0.1:5000/change/password', { username: name , password: this.state.password, opassword: this.state.opassword},{headers:headers});
+			const result = await axios.post('http://159.223.240.163/change/password', { username: name , password: this.state.password, opassword: this.state.opassword},{headers:headers});
 		    console.log(result)
 		}
 		else{
