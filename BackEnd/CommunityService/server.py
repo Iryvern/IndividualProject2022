@@ -9,6 +9,7 @@ from waitress import serve
 from community import *
 from database import *
 import os
+from dotenv import load_dotenv
 
 white = ["*"]
 
@@ -16,8 +17,8 @@ app = Flask(__name__)
 # Whitelist
 CORS(app, resources={r"/*": {"origins": white, "send_wildcard": "False"}})
 api = Api(app)
-#app.config["JWT_SECRET_KEY"] = os.environ["JWT_SECRET_KEY"]
-app.config["JWT_SECRET_KEY"] = "ZOl9P^8Ag9K6O2JCmjc&"
+load_dotenv()
+app.config["JWT_SECRET_KEY"] = os.environ["JWT_SECRET_KEY"]
 jwt = JWTManager(app)
 
 
