@@ -13,7 +13,8 @@ white = ["*"]
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": white, "send_wildcard": "False"}})
 api = Api(app)
-app.config["JWT_SECRET_KEY"] = os.environ["JWT_SECRET_KEY"]
+#app.config["JWT_SECRET_KEY"] = os.environ["JWT_SECRET_KEY"]
+app.config["JWT_SECRET_KEY"] = "ZOl9P^8Ag9K6O2JCmjc&"
 jwt = JWTManager(app)
 
 
@@ -24,7 +25,13 @@ class LoginFail(Resource):
         return response
 
 
+class Visit(Resource):
+    def get(self):
+        return "Hello Logging Service"
+
+
+api.add_resource(Visit, "/")
 api.add_resource(LoginFail, "/loginfail")
 
 if __name__ == "__main__":
-    serve(app, host="0.0.0.0", port=5002)
+    serve(app, port=8083)
