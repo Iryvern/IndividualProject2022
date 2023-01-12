@@ -1,4 +1,18 @@
-describe('Register', () => {
+describe('Login', () => {
+  it('Login works', () => {
+    cy.visit('http://134.209.135.45/');
+    cy.get('.link:nth-child(3)').click();
+    cy.get('.Username').click();
+    cy.get('.Username').type('tester');
+    cy.get('.Password').click();
+    cy.get('.Password').type('tester');
+    cy.get('button').click();
+    cy.url().should('contains', 'http://134.209.135.45/');
+    cy.get('.link:nth-child(5)').click();
+  })
+})
+
+/*describe('Register', () => {
   it('Registration works', () => {
     cy.visit('http://134.209.135.45/');
     cy.get('.Register .Username').click();
@@ -18,6 +32,4 @@ describe('Register', () => {
     cy.get('p:nth-child(4) > button').click();
     cy.url().should('contains', 'http://134.209.135.45/');
   })
-})
-
-//Test
+})*/
