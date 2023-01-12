@@ -5,3 +5,5 @@ cluster = MongoClient(
 
 db = cluster["IndividualDataDB3"]
 collection = db["Logs"]
+
+#

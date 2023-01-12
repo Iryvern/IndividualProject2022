@@ -31,6 +31,7 @@ class Get_Communities(Resource):
 
 
 class Create_Community(Resource):
+    @jwt_required()
     def post(self):
         username = request.args.get("username")
         community = request.args.get("community")
@@ -42,6 +43,7 @@ class Create_Community(Resource):
 
 
 class Delete_Community(Resource):
+    @jwt_required()
     def post(self):
         community = request.args.get("community")
         result = delete_community(community, collection)
@@ -52,6 +54,7 @@ class Delete_Community(Resource):
 
 
 class Join_Community(Resource):
+    @jwt_required()
     def get(self):
         username = request.args.get("username")
         community = request.args.get("community")
@@ -63,6 +66,7 @@ class Join_Community(Resource):
 
 
 class Leave_Community(Resource):
+    @jwt_required()
     def get(self):
         username = request.args.get("username")
         community = request.args.get("community")
@@ -74,6 +78,7 @@ class Leave_Community(Resource):
 
 
 class Post_In_Community(Resource):
+    @jwt_required()
     def post(self):
         username = request.args.get("username")
         community = request.args.get("community")
@@ -88,6 +93,7 @@ class Post_In_Community(Resource):
 
 
 class Get_Post(Resource):
+    @jwt_required()
     def get(self):
         post_id = request.args.get("post_id")
         result = get_post(post_id, collection)
@@ -98,6 +104,7 @@ class Get_Post(Resource):
 
 
 class Get_Community(Resource):
+    @jwt_required()
     def get(self):
         community = request.args.get("community")
         result = show_community_with_posts(community, collection)
@@ -108,6 +115,7 @@ class Get_Community(Resource):
 
 
 class Delete_Post(Resource):
+    @jwt_required()
     def post(self):
         post_id = request.args.get("post_id")
         result = delete_post(post_id, collection)
@@ -118,6 +126,7 @@ class Delete_Post(Resource):
 
 
 class Community_Rules(Resource):
+    @jwt_required()
     def post(self):
         username = request.args.get("username")
         community = request.args.get("community")
@@ -130,6 +139,7 @@ class Community_Rules(Resource):
 
 
 class Ban_In_Community(Resource):
+    @jwt_required()
     def post(self):
         username = request.args.get("username")
         community = request.args.get("community")
@@ -144,6 +154,7 @@ class Ban_In_Community(Resource):
 
 
 class Like_Post(Resource):
+    @jwt_required()
     def get(self):
         username = request.args.get("username")
         community = request.args.get("community")
@@ -157,6 +168,7 @@ class Like_Post(Resource):
 
 
 class Comment_Post(Resource):
+    @jwt_required()
     def post(self):
         username = request.args.get("username")
         community = request.args.get("community")
@@ -171,6 +183,7 @@ class Comment_Post(Resource):
 
 
 class Community_Members(Resource):
+    @jwt_required()
     def post(self):
         community = request.args.get("community")
         result = show_community_memebrs(community, collection)
@@ -181,6 +194,7 @@ class Community_Members(Resource):
 
 
 class Delete_Comment(Resource):
+    @jwt_required()
     def post(self):
         username = request.args.get("username")
         community = request.args.get("community")
@@ -195,6 +209,7 @@ class Delete_Comment(Resource):
 
 
 class Upgrade_User_To_Mod(Resource):
+    @jwt_required()
     def post(self):
         username = request.args.get("username")
         community = request.args.get("community")
@@ -206,6 +221,7 @@ class Upgrade_User_To_Mod(Resource):
 
 
 class Downgrade_To_User(Resource):
+    @jwt_required()
     def post(self):
         username = request.args.get("username")
         community = request.args.get("community")
