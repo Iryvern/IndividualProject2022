@@ -79,7 +79,6 @@ class Leave_Community(Resource):
 
 
 class Post_In_Community(Resource):
-    @jwt_required()
     def post(self):
         username = request.args.get("username")
         community = request.args.get("community")
@@ -234,7 +233,14 @@ class Visit(Resource):
         return "Hello Community"
 
 
+class Test(Resource):
+    def post(self):
+        test(collection)
+        return "Hello Community"
+
+
 api.add_resource(Visit, "/")
+api.add_resource(Test, "/test")
 api.add_resource(Get_Communities, "/a-communities")
 api.add_resource(Create_Community, "/c-create")
 api.add_resource(Delete_Community, "/c-delete")

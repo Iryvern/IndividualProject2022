@@ -259,3 +259,11 @@ def downgrade_to_user(username, community, db):
             return False
     else:
         return False
+
+
+def test(db):
+    unique_id = str(uuid.uuid4())
+    json_data = {"_id": unique_id,
+                 "TestData": "Data"}
+    db.insert_one(json_data)
+    return True
