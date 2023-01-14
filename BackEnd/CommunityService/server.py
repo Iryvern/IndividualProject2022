@@ -8,6 +8,7 @@ from flask_jwt_extended import JWTManager
 from waitress import serve
 from community import *
 from database import *
+import database
 import os
 
 
@@ -17,8 +18,7 @@ app = Flask(__name__)
 # Whitelist
 CORS(app, resources={r"/*": {"origins": white, "send_wildcard": "False"}})
 api = Api(app)
-#app.config["JWT_SECRET_KEY"] = os.environ["JWT_SECRET_KEY"]
-app.config["JWT_SECRET_KEY"] = "ZOl9P^8Ag9K6O2JCmjc&"
+app.config["JWT_SECRET_KEY"] = database.key()
 jwt = JWTManager(app)
 
 
