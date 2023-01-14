@@ -104,7 +104,8 @@ class Get_Post(Resource):
 
 class Get_Community(Resource):
     def get(self):
-        community = request.args.get("community")
+        community = request.args.get("c")
+        print(community)
         result = show_community_with_posts(community, collection)
         if result != None:
             return result

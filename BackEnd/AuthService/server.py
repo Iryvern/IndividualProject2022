@@ -12,15 +12,11 @@ import os
 
 white = ["*"]
 app = Flask(__name__)
-# Whitelist ,
+# Whitelist
+api = Api(app)
 CORS(app, resources={r"/*": {"origins": white, "send_wildcard": "False"}})
 app.config["JWT_SECRET_KEY"] = database.key()
 jwt = JWTManager(app)
-
-
-@app.route("/test", methods=["GET"])
-def test():
-    return "Test"
 
 
 class Login_Auth(Resource):
