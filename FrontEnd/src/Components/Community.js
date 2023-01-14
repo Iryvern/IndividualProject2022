@@ -17,7 +17,7 @@ class Community extends Component {
     }
     
     getAllPosts = async () => {
-		axios.get("http://188.166.201.183/community", {headers: {"Content-Type": "application/json"}, params: {"community": community_name}})
+		axios.get("http://188.166.201.183/community", {headers: {"Content-Type": "application/json"}, params: {"c": community_name}})
 			.then((res) => {
 				this.setState({ posts: res.data.posts });
                 this.setState({ members: res.data.members});

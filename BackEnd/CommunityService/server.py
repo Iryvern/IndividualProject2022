@@ -55,7 +55,6 @@ class Delete_Community(Resource):
 
 
 class Join_Community(Resource):
-    @jwt_required()
     def get(self):
         username = request.args.get("username")
         community = request.args.get("community")
@@ -67,7 +66,6 @@ class Join_Community(Resource):
 
 
 class Leave_Community(Resource):
-    @jwt_required()
     def get(self):
         username = request.args.get("username")
         community = request.args.get("community")
