@@ -20,7 +20,7 @@ class Register extends Component {
 
 	Register = async () => {
 		const result = await axios.post('http://159.223.240.163/register', { username: this.state.username , password: this.state.password, email: this.state.email});
-		console.log(result)
+		window.location = "/";
 	};
 	
 	handleUserInput  = (e) => {
