@@ -261,7 +261,7 @@ def downgrade_to_user(username, community, db):
         return False
 
 
-def test(db):
+def load(db):
     unique_id = str(uuid.uuid4())
     json_data = {"_id": unique_id,
                  "TestData": "Data"}
