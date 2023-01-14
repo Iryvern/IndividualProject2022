@@ -2,6 +2,8 @@ from encryption import *
 import uuid
 # L2
 
+# By using find_one instead of limit, the request can only process 1 entry and not leak multiple entries, although limit is used whenver more than 1 thing is returned
+
 
 def register(username, password, email, db):
     result = db.find_one({"username": username})

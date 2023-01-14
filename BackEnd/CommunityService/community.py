@@ -4,7 +4,7 @@ from datetime import datetime
 
 
 def get_all_communities(db):
-    result = list(db.find()).limit(100)
+    result = list(db.find().limit(100))
     if result is not None:
         return result
     else:
