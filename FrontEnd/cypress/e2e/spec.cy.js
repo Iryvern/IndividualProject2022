@@ -1,4 +1,4 @@
-//These tests allow to see whether the APIs are functionaing correctly
+//These tests allow to see whether the APIs are functionaing correctly and use a user storie as their motivation for implementation
 
 describe('Login', () => {
   it('Login works', () => {
